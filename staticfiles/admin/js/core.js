@@ -11,7 +11,7 @@ function quickElement() {
     const len = arguments.length;
     for (let i = 3; i < len; i += 2) {
         obj.setAttribute(arguments[i], arguments[i + 1]);
-    }
+    }   
     arguments[1].appendChild(obj);
     return obj;
 }

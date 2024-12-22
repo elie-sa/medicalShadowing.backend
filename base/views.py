@@ -3,7 +3,7 @@ from django.http import JsonResponse
 import random
 import time
 from agora_token_builder import RtcTokenBuilder
-from .models import RoomMember
+from .models import RoomMember, Room
 import json
 from django.views.decorators.csrf import csrf_exempt
 
@@ -62,3 +62,19 @@ def deleteMember(request):
     )
     member.delete()
     return JsonResponse('Member deleted', safe=False)
+
+def create_meeting(request):
+    data = json.loads(request.body)
+    Room.objects.create(
+        name = data['meeting_name'],
+        description = data['description'],
+        session_time = data['session_time'],
+    )
+
+    return JsonResponse('Successful')
+
+def get_meeting_details(request):
+    data = json.loads(request.body)
+    room = Room.objects.get(session_id=data['session_id'])
+
+    return JsonResponse({"session_id": room.session_id, "name": room.name, "description": room.description, "session_time": room.session_time})
