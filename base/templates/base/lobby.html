@@ -40,7 +40,7 @@
         let room = e.target.room.value.toUpperCase()
         let name = e.target.name.value
 
-        let response = await fetch(`/get_token/?channel=${room}`)
+        let response = await fetch(`https://eliesa.pythonanywhere.com/get_token/?channel=${room}`)
         let data = await response.json()
 
         let UID = data.uid
