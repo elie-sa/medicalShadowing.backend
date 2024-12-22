@@ -74,7 +74,6 @@ def create_meeting(request):
     return JsonResponse('Successful')
 
 def get_meeting_details(request):
-    data = json.loads(request.body)
-    room = Room.objects.get(session_id=data['session_id'])
+    room = Room.objects.get(request.GET.get('session_id'))
 
     return JsonResponse({"session_id": room.session_id, "name": room.name, "description": room.description, "session_time": room.session_time})
